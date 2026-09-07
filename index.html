@@ -7,704 +7,933 @@
 <title>Festa de Brincar | Festas afetivas em São Paulo</title>
 
 <meta name="description"
-content="Festa de Brincar. Decoração de festas infantis afetivas e autorais em São Paulo. Conheça nossas festas e a loja + Festa de Brincar.">
+content="Festa de Brincar. Decoração infantil afetiva e autoral em São Paulo. Festas, inspirações e loja + Festa de Brincar.">
 
 <style>
 
+:root{
+  --papel:#fbfaf7;
+  --branco:#ffffff;
+  --texto:#292723;
+  --cinza:#777168;
+  --linha:#e6e1d8;
+  --bege:#eee9e0;
+}
+
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+  box-sizing:border-box;
 }
 
 html{
-scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-font-family:Arial, Helvetica, sans-serif;
-color:#3d3936;
-background:#fffdf9;
-line-height:1.6;
+  margin:0;
+  background:var(--papel);
+  color:var(--texto);
+  font-family:Arial, Helvetica, sans-serif;
 }
 
 a{
-text-decoration:none;
-color:inherit;
+  color:inherit;
+  text-decoration:none;
 }
 
+
+/* CABEÇALHO */
+
 header{
-background:#fffdf9;
-border-bottom:1px solid #eee8df;
-position:sticky;
-top:0;
-z-index:10;
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(251,250,247,.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linha);
 }
 
 nav{
-max-width:1200px;
-margin:auto;
-padding:18px 24px;
-display:flex;
-align-items:center;
-justify-content:space-between;
+  max-width:1180px;
+  margin:auto;
+  padding:15px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
 }
 
 .logo{
-font-size:22px;
-font-weight:700;
-letter-spacing:.5px;
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.02em;
 }
 
 .menu{
-display:flex;
-gap:28px;
-font-size:14px;
+  display:flex;
+  gap:25px;
+  font-size:13px;
 }
 
-.hero{
-min-height:76vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:80px 24px;
-background:
-radial-gradient(circle at 20% 30%,#f5d6c6 0 5%,transparent 6%),
-radial-gradient(circle at 80% 25%,#d5dfcf 0 6%,transparent 7%),
-radial-gradient(circle at 70% 75%,#d6dcec 0 5%,transparent 6%),
-radial-gradient(circle at 25% 75%,#ead8a8 0 5%,transparent 6%),
-#f8f3ec;
-}
 
-.hero-content{
-max-width:760px;
-}
+/* GERAL */
 
-.hero h1{
-font-size:clamp(46px,8vw,88px);
-line-height:1;
-margin-bottom:24px;
-font-weight:700;
-}
-
-.hero p{
-font-family:Georgia,serif;
-font-size:22px;
-font-style:italic;
-margin-bottom:36px;
-}
-
-.button{
-display:inline-block;
-background:#3d3936;
-color:white;
-padding:14px 26px;
-border-radius:30px;
-font-size:14px;
-margin:5px;
-}
-
-.button.light{
-background:white;
-color:#3d3936;
-border:1px solid #d9d2c8;
-}
-
-section{
-padding:90px 24px;
+main{
+  overflow:hidden;
 }
 
 .container{
-max-width:1200px;
-margin:auto;
+  max-width:1180px;
+  margin:auto;
 }
 
 .label{
-font-size:12px;
-letter-spacing:2px;
-text-transform:uppercase;
-margin-bottom:12px;
-color:#8b8179;
-}
-
-h2{
-font-size:clamp(34px,5vw,58px);
-line-height:1.1;
-margin-bottom:20px;
-}
-
-.intro{
-max-width:700px;
-font-size:18px;
-color:#746c66;
-margin-bottom:45px;
-}
-
-.festas-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
-
-.festa{
-background:white;
-border-radius:18px;
-overflow:hidden;
-border:1px solid #eee8df;
-}
-
-.photo{
-height:340px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#eee7df;
-color:#958a82;
-font-size:13px;
-}
-
-.festa:nth-child(2) .photo{
-background:#e7ddd2;
-}
-
-.festa:nth-child(3) .photo{
-background:#e3e7df;
-}
-
-.festa-info{
-padding:22px;
-}
-
-.festa-info h3{
-font-size:21px;
-margin-bottom:5px;
-}
-
-.sobre{
-background:#f3eee7;
-}
-
-.sobre-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:70px;
-align-items:center;
-}
-
-.quote{
-font-family:Georgia,serif;
-font-style:italic;
-font-size:32px;
-line-height:1.35;
-}
-
-.loja{
-background:#fff;
-}
-
-.loja-top{
-text-align:center;
-max-width:780px;
-margin:0 auto 55px;
-}
-
-.plus{
-font-size:clamp(45px,8vw,82px);
-line-height:1;
-margin-bottom:18px;
-}
-
-.tagline{
-font-family:Georgia,serif;
-font-style:italic;
-font-size:26px;
-margin-bottom:22px;
-}
-
-.loja-text{
-color:#746c66;
-font-size:17px;
-}
-
-.categories{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:10px;
-margin-bottom:45px;
-}
-
-.category{
-border:1px solid #ddd4ca;
-padding:10px 18px;
-border-radius:30px;
-font-size:13px;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-}
-
-.product{
-border:1px solid #eee8df;
-border-radius:18px;
-overflow:hidden;
-background:#fffdf9;
-}
-
-.product-image{
-height:300px;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#f2e8de;
-font-size:13px;
-color:#958a82;
-}
-
-.product:nth-child(2) .product-image{
-background:#e7ebe2;
-}
-
-.product:nth-child(3) .product-image{
-background:#e9e2ef;
-}
-
-.product-info{
-padding:20px;
-}
-
-.product-type{
-font-size:11px;
-text-transform:uppercase;
-letter-spacing:1.5px;
-color:#958a82;
-}
-
-.product-info h3{
-margin:6px 0;
-font-size:19px;
-}
-
-.price{
-font-weight:bold;
-margin-top:12px;
-}
-
-.em-breve{
-display:inline-block;
-margin-top:12px;
-font-size:12px;
-background:#eee8df;
-padding:7px 12px;
-border-radius:20px;
-}
-
-.orcamento{
-text-align:center;
-background:#dfe6dc;
-}
-
-.orcamento p{
-max-width:600px;
-margin:0 auto 28px;
-font-size:18px;
-}
-
-footer{
-padding:45px 24px;
-background:#3d3936;
-color:white;
-}
-
-.footer-inner{
-max-width:1200px;
-margin:auto;
-display:flex;
-justify-content:space-between;
-gap:30px;
-}
-
-.footer-small{
-color:#cfc8c1;
-font-size:13px;
-}
-
-@media(max-width:800px){
-
-.menu{
-gap:13px;
-font-size:12px;
-}
-
-.logo{
-font-size:17px;
-}
-
-.hero{
-min-height:68vh;
-}
-
-.festas-grid,
-.products,
-.sobre-grid{
-grid-template-columns:1fr;
-}
-
-.photo{
-height:300px;
-}
-
-.product-image{
-height:280px;
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
 }
 
 section{
-padding:70px 20px;
+  padding:82px 22px;
 }
 
-.footer-inner{
-flex-direction:column;
+
+/* ABERTURA */
+
+.hero{
+  max-width:1180px;
+  margin:auto;
+  padding:62px 22px 40px;
+
+  display:grid;
+  grid-template-columns:.78fr 1.22fr;
+  gap:55px;
+  align-items:center;
 }
+
+.hero h1{
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:clamp(48px,7vw,86px);
+  font-weight:400;
+  line-height:.94;
+  letter-spacing:-.055em;
+  margin:13px 0 25px;
+}
+
+.hero-text{
+  max-width:420px;
+  font-size:16px;
+  line-height:1.7;
+  color:var(--cinza);
+}
+
+.assinatura{
+  font-family:Georgia, "Times New Roman", serif;
+  font-style:italic;
+  font-size:18px;
+  margin-top:30px;
+}
+
+
+/* ESPAÇOS PARA FOTOS */
+
+.foto{
+  background:#e9e5dc;
+  position:relative;
+  overflow:hidden;
+}
+
+.foto::after{
+  content:"foto";
+  position:absolute;
+  inset:0;
+
+  display:grid;
+  place-items:center;
+
+  color:#a29b91;
+  font-size:9px;
+  letter-spacing:.20em;
+  text-transform:uppercase;
+}
+
+.hero-fotos{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:13px;
+  align-items:end;
+}
+
+.hero-fotos .principal{
+  aspect-ratio:3/4;
+}
+
+.hero-fotos .detalhe{
+  aspect-ratio:1/1;
+  margin-bottom:38px;
+}
+
+
+/* FESTAS */
+
+.cabecalho-secao{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:35px;
+  margin-bottom:42px;
+}
+
+.cabecalho-secao h2{
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:clamp(36px,5vw,58px);
+  font-weight:400;
+  line-height:1;
+  margin:9px 0 0;
+}
+
+.cabecalho-secao p{
+  max-width:390px;
+  margin:0;
+  color:var(--cinza);
+  line-height:1.65;
+  font-size:14px;
+}
+
+
+/* MURAL TIPO PINTEREST */
+
+.pinterest{
+  columns:3;
+  column-gap:16px;
+}
+
+.pin{
+  break-inside:avoid;
+  margin-bottom:20px;
+}
+
+.pin .foto{
+  width:100%;
+}
+
+.pin:nth-child(1) .foto{
+  aspect-ratio:3/4;
+}
+
+.pin:nth-child(2) .foto{
+  aspect-ratio:4/3;
+}
+
+.pin:nth-child(3) .foto{
+  aspect-ratio:1/1;
+}
+
+.pin:nth-child(4) .foto{
+  aspect-ratio:5/6;
+}
+
+.pin:nth-child(5) .foto{
+  aspect-ratio:3/4;
+}
+
+.pin:nth-child(6) .foto{
+  aspect-ratio:4/3;
+}
+
+.legenda{
+  padding:9px 2px 3px;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.legenda strong{
+  font-weight:600;
+}
+
+
+/* SOBRE */
+
+.sobre{
+  background:var(--bege);
+}
+
+.sobre-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+}
+
+.sobre h2{
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:clamp(40px,5vw,64px);
+  line-height:1.05;
+  font-weight:400;
+  margin:0;
+}
+
+.sobre-texto{
+  font-size:16px;
+  line-height:1.85;
+  color:#5f5a53;
+}
+
+.sobre-texto p:first-child{
+  margin-top:0;
+}
+
+
+/* DETALHES */
+
+.detalhes{
+  background:var(--papel);
+}
+
+.detalhes-titulo{
+  max-width:600px;
+  margin-bottom:40px;
+}
+
+.detalhes-titulo h2{
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:clamp(37px,5vw,58px);
+  font-weight:400;
+  margin:10px 0 0;
+}
+
+.detalhes-grid{
+  display:grid;
+  grid-template-columns:1fr .8fr 1fr;
+  gap:16px;
+  align-items:center;
+}
+
+.detalhes-grid .foto:nth-child(1){
+  aspect-ratio:4/5;
+}
+
+.detalhes-grid .foto:nth-child(2){
+  aspect-ratio:1/1;
+}
+
+.detalhes-grid .foto:nth-child(3){
+  aspect-ratio:4/5;
+}
+
+
+/* LOJA */
+
+.loja{
+  background:var(--branco);
+}
+
+.loja-intro{
+  max-width:730px;
+  margin:0 auto 45px;
+  text-align:center;
+}
+
+.loja-intro h2{
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:clamp(45px,7vw,76px);
+  font-weight:400;
+  letter-spacing:-.04em;
+  margin:10px 0 8px;
+}
+
+.loja-intro .subtitulo{
+  font-family:Georgia, "Times New Roman", serif;
+  font-style:italic;
+  font-size:23px;
+}
+
+.loja-intro p{
+  max-width:610px;
+  margin:23px auto 0;
+  color:var(--cinza);
+  font-size:15px;
+  line-height:1.75;
+}
+
+.categorias{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+  margin:30px 0 45px;
+}
+
+.categorias span{
+  border:1px solid #d8d3ca;
+  padding:9px 15px;
+  font-size:10px;
+  letter-spacing:.08em;
+}
+
+.produtos{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:17px;
+}
+
+.produto .foto{
+  aspect-ratio:4/5;
+}
+
+.produto h3{
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:20px;
+  font-weight:400;
+  margin:13px 0 5px;
+}
+
+.produto small{
+  color:var(--cinza);
+}
+
+
+/* ORÇAMENTO */
+
+.orcamento{
+  text-align:center;
+  padding:100px 22px;
+}
+
+.orcamento h2{
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:clamp(42px,6vw,70px);
+  font-weight:400;
+  line-height:1.05;
+  margin:10px 0 16px;
+}
+
+.orcamento p{
+  color:var(--cinza);
+  margin-bottom:30px;
+}
+
+.botao{
+  display:inline-block;
+  border-bottom:1px solid var(--texto);
+  padding:8px 1px;
+
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+
+/* RODAPÉ */
+
+footer{
+  border-top:1px solid var(--linha);
+  padding:28px 22px;
+  color:var(--cinza);
+  font-size:11px;
+}
+
+.footer{
+  max-width:1180px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+}
+
+
+/* CELULAR */
+
+@media(max-width:760px){
+
+  nav{
+    padding:14px 18px;
+  }
+
+  .logo{
+    font-size:15px;
+  }
+
+  .menu{
+    gap:13px;
+    font-size:10px;
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:44px;
+    gap:32px;
+  }
+
+  .hero h1{
+    font-size:58px;
+  }
+
+  .hero-fotos{
+    width:108%;
+    margin-left:-4%;
+  }
+
+  section{
+    padding:65px 18px;
+  }
+
+  .cabecalho-secao{
+    display:block;
+  }
+
+  .cabecalho-secao p{
+    margin-top:20px;
+  }
+
+  .pinterest{
+    columns:2;
+    column-gap:10px;
+  }
+
+  .pin{
+    margin-bottom:14px;
+  }
+
+  .sobre-grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+
+  .detalhes-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .detalhes-grid .foto:nth-child(3){
+    grid-column:1/3;
+    aspect-ratio:4/3;
+  }
+
+  .produtos{
+    grid-template-columns:1fr 1fr;
+    gap:11px;
+  }
+
+  .produto:nth-child(3){
+    grid-column:1/3;
+    width:50%;
+    margin:auto;
+  }
+
+  .footer{
+    gap:20px;
+  }
 
 }
 
 </style>
 </head>
 
+
 <body>
 
 <header>
+
 <nav>
 
-<a href="#" class="logo">Festa de Brincar</a>
+<a href="#" class="logo">
+Festa de Brincar
+</a>
 
 <div class="menu">
+
 <a href="#festas">Festas</a>
 <a href="#sobre">Sobre</a>
 <a href="#loja">Loja</a>
 <a href="#orcamento">Orçamento</a>
+
 </div>
 
 </nav>
+
 </header>
 
 
+<main>
+
+
+<!-- ABERTURA -->
+
 <section class="hero">
 
-<div class="hero-content">
-
-<div class="label">Festas afetivas · São Paulo</div>
-
-<h1>Festa de Brincar</h1>
-
-<p>decorar é contar histórias</p>
-
-<a href="#festas" class="button">
-Conheça nossas festas
-</a>
-
-<a href="#loja" class="button light">
-Visite a loja
-</a>
-
-</div>
-
-</section>
-
-
-<section id="festas">
-
-<div class="container">
-
-<div class="label">Nosso trabalho</div>
-
-<h2>Festas para guardar na memória.</h2>
-
-<p class="intro">
-Criamos festas infantis afetivas e autorais,
-pensadas a partir da história, dos gostos
-e do universo de cada criança.
-</p>
-
-
-<div class="festas-grid">
-
-<div class="festa">
-
-<div class="photo">
-FOTO DA FESTA
-</div>
-
-<div class="festa-info">
-<h3>Circo</h3>
-<p>Uma festa cheia de histórias, texturas e pequenos detalhes.</p>
-</div>
-
-</div>
-
-
-<div class="festa">
-
-<div class="photo">
-FOTO DA FESTA
-</div>
-
-<div class="festa-info">
-<h3>Festa em casa</h3>
-<p>Para transformar a casa em cenário de uma memória especial.</p>
-</div>
-
-</div>
-
-
-<div class="festa">
-
-<div class="photo">
-FOTO DA FESTA
-</div>
-
-<div class="festa-info">
-<h3>Música</h3>
-<p>Um universo criado especialmente para quem ama música.</p>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="sobre" class="sobre">
-
-<div class="container sobre-grid">
-
 <div>
-
-<div class="label">Sobre nós</div>
-
-<h2>
-A festa começa muito antes do parabéns.
-</h2>
-
-</div>
-
-
-<div>
-
-<p class="quote">
-“Decorar é contar histórias.”
-</p>
-
-<br>
-
-<p>
-A Festa de Brincar cria decorações infantis
-com uma linguagem afetiva, artesanal e autoral.
-</p>
-
-<br>
-
-<p>
-Misturamos peças do nosso acervo, ilustração,
-tecidos, mobiliário, objetos e detalhes
-para criar uma festa que tenha a cara
-de cada criança.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="loja" class="loja">
-
-<div class="container">
-
-<div class="loja-top">
-
-<div class="label">Loja</div>
-
-<h2 class="plus">
-+ Festa de Brincar
-</h2>
-
-<div class="tagline">
-Para além da decoração.
-</div>
-
-<p class="loja-text">
-Um espaço para tudo o que nasce do nosso universo criativo:
-coisas para brincar, criar, presentear, decorar
-e levar um pouquinho da Festa de Brincar para a vida.
-</p>
-
-</div>
-
-
-<div class="categories">
-
-<div class="category">Brincar</div>
-<div class="category">Criar</div>
-<div class="category">Decorar</div>
-<div class="category">Presentear</div>
-<div class="category">Imprimir</div>
-
-</div>
-
-
-<div class="products">
-
-<div class="product">
-
-<div class="product-image">
-PRODUTO
-</div>
-
-<div class="product-info">
-
-<div class="product-type">
-Produto físico
-</div>
-
-<h3>
-Primeiros produtos em breve
-</h3>
-
-<p>
-Objetos, papelaria e pequenas coisas
-do universo Festa de Brincar.
-</p>
-
-<span class="em-breve">
-em breve
-</span>
-
-</div>
-
-</div>
-
-
-<div class="product">
-
-<div class="product-image">
-PRODUTO
-</div>
-
-<div class="product-info">
-
-<div class="product-type">
-Para brincar
-</div>
-
-<h3>
-Coisas para inventar
-</h3>
-
-<p>
-Produtos para brincar, criar e guardar.
-</p>
-
-<span class="em-breve">
-em breve
-</span>
-
-</div>
-
-</div>
-
-
-<div class="product">
-
-<div class="product-image">
-PRODUTO DIGITAL
-</div>
-
-<div class="product-info">
-
-<div class="product-type">
-Digital
-</div>
-
-<h3>
-Imprima você mesma
-</h3>
-
-<p>
-Arquivos digitais para imprimir,
-recortar e criar.
-</p>
-
-<span class="em-breve">
-em breve
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section id="orcamento" class="orcamento">
-
-<div class="container">
 
 <div class="label">
-Vamos fazer uma festa?
+festas afetivas · são paulo
 </div>
 
-<h2>
-Conte sua história para a gente.
-</h2>
+<h1>
+Festas<br>
+com história.
+</h1>
 
-<p>
-Cada festa começa com uma conversa.
-Conte um pouco sobre a criança,
-a data e o que você está imaginando.
+<p class="hero-text">
+Decorações infantis autorais, feitas de encontros,
+memórias, brincadeiras e pequenos detalhes.
 </p>
 
-<a href="#" class="button">
-Pedir orçamento
-</a>
-
-</div>
-
-</section>
-
-
-<footer>
-
-<div class="footer-inner">
-
-<div>
-<strong>Festa de Brincar</strong><br>
-<span class="footer-small">
-São Paulo · SP
-</span>
-</div>
-
-<div class="footer-small">
-Festas · + Festa de Brincar<br>
+<div class="assinatura">
 decorar é contar histórias
 </div>
 
 </div>
 
+
+<div class="hero-fotos">
+
+<div class="foto principal"></div>
+
+<div class="foto detalhe"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- FESTAS -->
+
+<section id="festas">
+
+<div class="container">
+
+<div class="cabecalho-secao">
+
+<div>
+
+<div class="label">
+nosso trabalho
+</div>
+
+<h2>
+Festas de brincar.
+</h2>
+
+</div>
+
+<p>
+Cada projeto nasce do universo da criança
+e ganha forma com peças, tecidos,
+ilustrações, objetos e muito cuidado.
+</p>
+
+</div>
+
+
+<div class="pinterest">
+
+
+<div class="pin">
+
+<div class="foto"></div>
+
+<div class="legenda">
+<strong>Circo</strong><br>
+detalhes para olhar de perto
+</div>
+
+</div>
+
+
+<div class="pin">
+
+<div class="foto"></div>
+
+<div class="legenda">
+<strong>Sereia</strong><br>
+um fundo do mar delicado
+</div>
+
+</div>
+
+
+<div class="pin">
+
+<div class="foto"></div>
+
+<div class="legenda">
+<strong>Espaço</strong><br>
+para imaginar longe
+</div>
+
+</div>
+
+
+<div class="pin">
+
+<div class="foto"></div>
+
+<div class="legenda">
+<strong>Feito à mão</strong><br>
+texturas e pequenos gestos
+</div>
+
+</div>
+
+
+<div class="pin">
+
+<div class="foto"></div>
+
+<div class="legenda">
+<strong>Festa em casa</strong><br>
+a casa vira cenário
+</div>
+
+</div>
+
+
+<div class="pin">
+
+<div class="foto"></div>
+
+<div class="legenda">
+<strong>Detalhes</strong><br>
+porque eles contam a história
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- SOBRE -->
+
+<section id="sobre" class="sobre">
+
+<div class="container sobre-grid">
+
+
+<div>
+
+<div class="label">
+sobre a festa de brincar
+</div>
+
+<br>
+
+<h2>
+A festa começa
+muito antes
+do parabéns.
+</h2>
+
+</div>
+
+
+<div class="sobre-texto">
+
+<p>
+Gostamos de festas que parecem ter sido feitas
+para aquela criança — porque foram.
+</p>
+
+<p>
+Misturamos nosso acervo, ilustração,
+tecidos, mobiliário e objetos para criar
+composições afetivas, leves e cheias
+de personalidade.
+</p>
+
+<p>
+Sem fórmulas prontas.
+Com espaço para brincar.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- DETALHES -->
+
+<section class="detalhes">
+
+<div class="container">
+
+<div class="detalhes-titulo">
+
+<div class="label">
+de perto
+</div>
+
+<h2>
+É nos detalhes que
+a história aparece.
+</h2>
+
+</div>
+
+
+<div class="detalhes-grid">
+
+<div class="foto"></div>
+<div class="foto"></div>
+<div class="foto"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- LOJA -->
+
+<section id="loja" class="loja">
+
+<div class="container">
+
+
+<div class="loja-intro">
+
+<div class="label">
+loja
+</div>
+
+<h2>
++ Festa de Brincar
+</h2>
+
+<div class="subtitulo">
+Para além da decoração.
+</div>
+
+<p>
+Um espaço para tudo o que nasce
+do nosso universo criativo:
+coisas para brincar, criar,
+presentear, decorar e levar
+um pouquinho da Festa de Brincar
+para a vida.
+</p>
+
+</div>
+
+
+<div class="categorias">
+
+<span>BRINCAR</span>
+<span>CRIAR</span>
+<span>DECORAR</span>
+<span>PRESENTEAR</span>
+<span>IMPRIMIR</span>
+
+</div>
+
+
+<div class="produtos">
+
+
+<div class="produto">
+
+<div class="foto"></div>
+
+<h3>
+Coisas para brincar
+</h3>
+
+<small>
+em breve
+</small>
+
+</div>
+
+
+<div class="produto">
+
+<div class="foto"></div>
+
+<h3>
+Coisas para guardar
+</h3>
+
+<small>
+em breve
+</small>
+
+</div>
+
+
+<div class="produto">
+
+<div class="foto"></div>
+
+<h3>
+Coisas para imprimir
+</h3>
+
+<small>
+em breve
+</small>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ORÇAMENTO -->
+
+<section id="orcamento" class="orcamento">
+
+<div class="label">
+vamos fazer uma festa?
+</div>
+
+<h2>
+Conte sua história<br>
+pra gente.
+</h2>
+
+<p>
+Cada festa começa com uma conversa.
+</p>
+
+<a href="#" class="botao">
+pedir orçamento
+</a>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+<div class="footer">
+
+<span>
+Festa de Brincar · São Paulo
+</span>
+
+<span>
+decorar é contar histórias
+</span>
+
+</div>
+
 </footer>
+
 
 </body>
 </html>
-<!-- redeploy -->
