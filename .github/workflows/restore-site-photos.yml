@@ -1,0 +1,31 @@
+name: Restaurar fotos do site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/site-festa-fotos.tar.gz"
+      - "scripts/restore-site-photos.sh"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restaurar fotos
+        run: bash scripts/restore-site-photos.sh
+      - name: Publicar imagens extraídas
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/uploads public/site-photos || true
+          if git diff --cached --quiet; then
+            echo "Sem alterações."
+          else
+            git commit -m "Restaura fotos em alta resolução"
+            git push
+          fi
