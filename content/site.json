@@ -1,0 +1,13 @@
+{
+  "brand": "Festa de Brincar",
+  "tagline": "decorar é contar histórias",
+  "city": "São Paulo · SP",
+  "navigation": [
+    "Festas",
+    "Sobre",
+    "Loja",
+    "Orçamento"
+  ],
+  "imageDirectory": "/assets/uploads/",
+  "notes": "As fotos novas do site devem ser colocadas em assets/uploads e usadas sem compressão agressiva."
+}
