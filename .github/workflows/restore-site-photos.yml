@@ -4,8 +4,10 @@ on:
   push:
     branches: [main]
     paths:
-      - "assets/site-festa-fotos.tar.gz"
-      - "scripts/restore-site-photos.sh"
+      - "assets/site-fotos.part*.b64"
+      - "assets/site-fotos.part*.hex"
+      - "assets/site-fotos.part*.hex.rev"
+      - ".github/workflows/restore-site-photos.yml"
   workflow_dispatch:
 
 permissions:
@@ -16,16 +18,57 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Restaurar fotos
-        run: bash scripts/restore-site-photos.sh
-      - name: Publicar imagens extraídas
+
+      - name: Reconstruir pacote de fotos
+        shell: bash
         run: |
+          set -euo pipefail
+          B64=/tmp/site-festa-fotos.b64
+          TAR=/tmp/site-festa-fotos.tar.gz
+          : > "$B64"
+
+          for n in $(seq -w 0 15); do
+            cat "assets/site-fotos.part${n}.b64" >> "$B64"
+          done
+
+          for n in 16 17 18; do
+            python3 - "$n" >> "$B64" <<'PY'
+import sys
+from pathlib import Path
+n=sys.argv[1]
+h=Path(f"assets/site-fotos.part{n}.hex").read_text().strip()
+sys.stdout.write(bytes.fromhex(h).decode("ascii"))
+PY
+          done
+
+          for n in 19 20; do
+            python3 - "$n" >> "$B64" <<'PY'
+import sys
+from pathlib import Path
+n=sys.argv[1]
+h=Path(f"assets/site-fotos.part{n}.hex.rev").read_text().strip()[::-1]
+sys.stdout.write(bytes.fromhex(h).decode("ascii"))
+PY
+          done
+
+          base64 -d "$B64" > "$TAR"
+          rm -rf /tmp/site-photos-extract
+          mkdir -p /tmp/site-photos-extract
+          tar -xzf "$TAR" -C /tmp/site-photos-extract
+
+          mkdir -p assets/uploads
+          cp -f /tmp/site-photos-extract/site_photos/*.jpg assets/uploads/
+
+      - name: Publicar fotos restauradas
+        shell: bash
+        run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/uploads public/site-photos || true
+          git add assets/uploads
           if git diff --cached --quiet; then
             echo "Sem alterações."
           else
-            git commit -m "Restaura fotos em alta resolução"
+            git commit -m "Publica fotos em alta resolução no site"
             git push
           fi
