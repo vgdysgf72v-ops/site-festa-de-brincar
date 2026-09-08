@@ -32,23 +32,11 @@ jobs:
           done
 
           for n in 16 17 18; do
-            python3 - "$n" >> "$B64" <<'PY'
-import sys
-from pathlib import Path
-n=sys.argv[1]
-h=Path(f"assets/site-fotos.part{n}.hex").read_text().strip()
-sys.stdout.write(bytes.fromhex(h).decode("ascii"))
-PY
+            python3 -c 'import sys; from pathlib import Path; h=Path(sys.argv[1]).read_text().strip(); sys.stdout.write(bytes.fromhex(h).decode("ascii"))' "assets/site-fotos.part${n}.hex" >> "$B64"
           done
 
           for n in 19 20; do
-            python3 - "$n" >> "$B64" <<'PY'
-import sys
-from pathlib import Path
-n=sys.argv[1]
-h=Path(f"assets/site-fotos.part{n}.hex.rev").read_text().strip()[::-1]
-sys.stdout.write(bytes.fromhex(h).decode("ascii"))
-PY
+            python3 -c 'import sys; from pathlib import Path; h=Path(sys.argv[1]).read_text().strip()[::-1]; sys.stdout.write(bytes.fromhex(h).decode("ascii"))' "assets/site-fotos.part${n}.hex.rev" >> "$B64"
           done
 
           base64 -d "$B64" > "$TAR"
