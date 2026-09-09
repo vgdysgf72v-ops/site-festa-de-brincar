@@ -68,6 +68,13 @@ jobs:
                   if any(k in u.lower() for k in ("download", "file", ".jpg", ".jpeg", ".png", ".webp")):
                       candidates.append(urllib.parse.urljoin(final_url, u))
 
+              # Ignora recursos estáticos da interface (logos, ícones etc.).
+              candidates = [u for u in candidates if "/_next/static/" not in u]
+
+              print("Candidatos encontrados:")
+              for u in candidates[:100]:
+                  print("  ", u)
+
               seen = set()
               best = None
               best_url = None
