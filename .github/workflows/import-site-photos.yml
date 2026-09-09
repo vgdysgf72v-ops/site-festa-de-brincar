@@ -65,27 +65,27 @@ jobs:
               for x in list(dict.fromkeys(found_diag))[:150]:
                   print("DIAG", html.unescape(x).replace("\\/","/"))
 
-              # Inspeciona o JavaScript da página para descobrir a rota usada pelo próprio site.
-              js_candidates = [
-                  urllib.parse.urljoin(final_url, "/_next/static/chunks/app/(files)/ja/f/page-4d19ae0a4ce39d79.js")
-              ]
-              for js_url in js_candidates:
+              # Inspeciona os módulos JavaScript carregados pela página para descobrir a rota oficial de download.
+              js_paths = re.findall(r'<script[^>]+src=["\']([^"\']+\.js)["\']', text, re.I)
+              print("JSFILES", len(js_paths))
+              for js in list(dict.fromkeys(js_paths)):
+                  js_url = urllib.parse.urljoin(final_url, js)
                   try:
                       with fetch(js_url) as r:
                           js_text = r.read().decode("utf-8", "ignore")
-                      print("JSLEN", len(js_text))
-                      print("JSTEXT", js_text[:2000])
-                      for key in ("download","fetch(","api/","shareId","publicId","fileId","prepare","presign","signed"):
-                          pos = 0
-                          shown = 0
-                          low = js_text.lower()
-                          while shown < 30:
-                              i = low.find(key.lower(), pos)
-                              if i < 0:
-                                  break
-                              print("JSDIAG", key, js_text[max(0,i-220):i+420])
-                              pos = i + len(key)
-                              shown += 1
+                      low = js_text.lower()
+                      if any(k in low for k in ("download","fetch(","api/","shareid","publicid","fileid","presign","signed")):
+                          print("JSMATCH", js_url, len(js_text))
+                          for key in ("download","fetch(","api/","shareId","publicId","fileId","prepare","presign","signed"):
+                              pos = 0
+                              shown = 0
+                              while shown < 20:
+                                  i = low.find(key.lower(), pos)
+                                  if i < 0:
+                                      break
+                                  print("JSDIAG", key, js_text[max(0,i-220):i+520])
+                                  pos = i + len(key)
+                                  shown += 1
                   except Exception as e:
                       print("JSDIAGERR", js_url, e)
 
