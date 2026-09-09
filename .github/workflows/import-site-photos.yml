@@ -65,6 +65,18 @@ jobs:
               for x in list(dict.fromkeys(found_diag))[:150]:
                   print("DIAG", html.unescape(x).replace("\\/","/"))
 
+              # Inspeciona o JavaScript da página para descobrir a rota usada pelo próprio site.
+              for js in re.findall(r'src=["\']([^"\']+page-[^"\']+\.js)["\']', text, re.I):
+                  js_url = urllib.parse.urljoin(final_url, js)
+                  try:
+                      with fetch(js_url) as r:
+                          js_text = r.read().decode("utf-8", "ignore")
+                      api_bits = re.findall(r'[^"\'<>\\\s]{0,100}(?:/api/|download|fetch\(|shareId|publicId|fileId)[^"\'<>\\\s]{0,180}', js_text, re.I)
+                      for x in list(dict.fromkeys(api_bits))[:200]:
+                          print("JSDIAG", x)
+                  except Exception as e:
+                      print("JSDIAGERR", js_url, e)
+
               candidates = []
 
               # URLs absolutas embutidas no HTML/JSON da página de compartilhamento.
