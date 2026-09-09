@@ -69,6 +69,8 @@ jobs:
                       candidates.append(urllib.parse.urljoin(final_url, u))
 
               seen = set()
+              best = None
+              best_url = None
               for u in candidates:
                   if u in seen:
                       continue
@@ -78,10 +80,16 @@ jobs:
                           b = r.read()
                           ct = (r.headers.get("Content-Type") or "").lower()
                       if ct.startswith("image/") and len(b) > 10000:
-                          target.write_bytes(b)
-                          return
+                          if best is None or len(b) > len(best):
+                              best = b
+                              best_url = u
                   except Exception:
                       pass
+
+              if best is not None:
+                  target.write_bytes(best)
+                  print(f"Origem escolhida: {best_url} ({len(best)} bytes)")
+                  return
 
               raise RuntimeError(f"Não foi possível localizar o arquivo de imagem na página compartilhada: {url}")
 
