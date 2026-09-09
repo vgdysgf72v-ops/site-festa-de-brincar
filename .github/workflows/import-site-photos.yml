@@ -23,24 +23,76 @@ jobs:
           set -euo pipefail
           mkdir -p public/site-photos
           python - <<'PY'
-          import json, pathlib, urllib.request
+          import json, pathlib, urllib.request, urllib.parse, re, html
+
           manifest = pathlib.Path("content/photo-import.json")
-          if not manifest.exists():
-              raise SystemExit("Manifesto não encontrado.")
           data = json.loads(manifest.read_text())
           photos = data.get("photos", [])
           if not photos:
               raise SystemExit("Nenhuma foto para importar.")
+
           out = pathlib.Path("public/site-photos")
+
+          def fetch(url):
+              req = urllib.request.Request(
+                  url,
+                  headers={
+                      "User-Agent": "Mozilla/5.0 Festa-de-Brincar-importer/1.0",
+                      "Accept": "*/*",
+                  },
+              )
+              return urllib.request.urlopen(req, timeout=90)
+
+          def resolve_and_download(url, target):
+              with fetch(url) as r:
+                  body = r.read()
+                  ctype = (r.headers.get("Content-Type") or "").lower()
+                  final_url = r.geturl()
+
+              if ctype.startswith("image/"):
+                  target.write_bytes(body)
+                  return
+
+              text = body.decode("utf-8", "ignore")
+              candidates = []
+
+              # URLs absolutas embutidas no HTML/JSON da página de compartilhamento.
+              for m in re.finditer(r'https?://[^"\'<>\\\s]+', text):
+                  u = html.unescape(m.group(0)).replace("\\/","/")
+                  if any(k in u.lower() for k in ("download", "file", "object", "storage", ".jpg", ".jpeg", ".png", ".webp")):
+                      candidates.append(u)
+
+              # href/src relativos.
+              for m in re.finditer(r'(?:href|src)=["\']([^"\']+)["\']', text, re.I):
+                  u = html.unescape(m.group(1))
+                  if any(k in u.lower() for k in ("download", "file", ".jpg", ".jpeg", ".png", ".webp")):
+                      candidates.append(urllib.parse.urljoin(final_url, u))
+
+              seen = set()
+              for u in candidates:
+                  if u in seen:
+                      continue
+                  seen.add(u)
+                  try:
+                      with fetch(u) as r:
+                          b = r.read()
+                          ct = (r.headers.get("Content-Type") or "").lower()
+                      if ct.startswith("image/") and len(b) > 10000:
+                          target.write_bytes(b)
+                          return
+                  except Exception:
+                      pass
+
+              raise RuntimeError(f"Não foi possível localizar o arquivo de imagem na página compartilhada: {url}")
+
           for item in photos:
               url = item["url"]
               name = pathlib.Path(item["filename"]).name
               target = out / name
-              req = urllib.request.Request(url, headers={"User-Agent":"Festa-de-Brincar-importer/1.0"})
-              with urllib.request.urlopen(req, timeout=90) as r, target.open("wb") as f:
-                  f.write(r.read())
+              resolve_and_download(url, target)
               if target.stat().st_size < 10000:
                   raise RuntimeError(f"Arquivo muito pequeno ou inválido: {name}")
+              print(f"{name}: {target.stat().st_size} bytes")
           PY
 
       - name: Criar pacote de assets
@@ -49,16 +101,18 @@ jobs:
           set -euo pipefail
           tar -czf assets/site-festa-fotos.tar.gz public/site-photos
 
-      - name: Versionar pacote
+      - name: Versionar fotos e pacote
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p assets/uploads
+          cp -f public/site-photos/* assets/uploads/
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/site-festa-fotos.tar.gz
+          git add assets/site-festa-fotos.tar.gz assets/uploads public/site-photos
           if git diff --cached --quiet; then
-            echo "Pacote já está atualizado."
+            echo "Fotos já estão atualizadas."
           else
-            git commit -m "Atualiza fotos do site"
+            git commit -m "Atualiza fotos do site em alta resolução"
             git push
           fi
