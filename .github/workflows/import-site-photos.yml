@@ -66,14 +66,15 @@ jobs:
                   print("DIAG", html.unescape(x).replace("\\/","/"))
 
               # Inspeciona o JavaScript da página para descobrir a rota usada pelo próprio site.
-              js_paths = re.findall(r'/_next/static/chunks/app/[^"\'<>\\\s]+page-[^"\'<>\\\s]+\.js', text, re.I)
-              for js in list(dict.fromkeys(js_paths)):
-                  js_url = urllib.parse.urljoin(final_url, js)
+              js_candidates = [
+                  urllib.parse.urljoin(final_url, "/_next/static/chunks/app/(files)/ja/f/page-4d19ae0a4ce39d79.js")
+              ]
+              for js_url in js_candidates:
                   try:
                       with fetch(js_url) as r:
                           js_text = r.read().decode("utf-8", "ignore")
-                      api_bits = re.findall(r'[^"\'<>\\\s]{0,120}(?:/api/|download|fetch\(|shareId|publicId|fileId)[^"\'<>\\\s]{0,220}', js_text, re.I)
-                      for x in list(dict.fromkeys(api_bits))[:300]:
+                      api_bits = re.findall(r'[^"\'<>\\\s]{0,160}(?:/api/|download|fetch\(|shareId|publicId|fileId)[^"\'<>\\\s]{0,260}', js_text, re.I)
+                      for x in list(dict.fromkeys(api_bits))[:400]:
                           print("JSDIAG", x)
                   except Exception as e:
                       print("JSDIAGERR", js_url, e)
