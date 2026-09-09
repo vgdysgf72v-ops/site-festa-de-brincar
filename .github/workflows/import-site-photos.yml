@@ -54,6 +54,17 @@ jobs:
                   return
 
               text = body.decode("utf-8", "ignore")
+              print("Diagnóstico da página compartilhada:")
+              pats = [
+                  r'[^"\'<>\\\s]{0,80}(?:api|download|share|file|object)[^"\'<>\\\s]{0,120}',
+                  r'/_next/data/[^"\'<>\\\s]+',
+              ]
+              found_diag = []
+              for pat in pats:
+                  found_diag.extend(re.findall(pat, text, re.I))
+              for x in list(dict.fromkeys(found_diag))[:150]:
+                  print("DIAG", html.unescape(x).replace("\\/","/"))
+
               candidates = []
 
               # URLs absolutas embutidas no HTML/JSON da página de compartilhamento.
