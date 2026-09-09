@@ -76,6 +76,9 @@ jobs:
                       low = js_text.lower()
                       if any(k in low for k in ("download","fetch(","api/","shareid","publicid","fileid","presign","signed")):
                           print("JSMATCH", js_url, len(js_text))
+                          for pat in (r'let f=[^,;]{1,300}', r'var f=[^,;]{1,300}', r'f=["\'][^"\']+["\']', r'https?://[^"\']+/api[^"\']*'):
+                              for m in re.finditer(pat, js_text):
+                                  print("FBASE", m.group(0))
                           for key in ("download","fetch(","api/","shareId","publicId","fileId","prepare","presign","signed"):
                               pos = 0
                               shown = 0
