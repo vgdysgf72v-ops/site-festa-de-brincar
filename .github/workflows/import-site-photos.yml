@@ -74,6 +74,7 @@ jobs:
                       with fetch(js_url) as r:
                           js_text = r.read().decode("utf-8", "ignore")
                       print("JSLEN", len(js_text))
+                      print("JSTEXT", js_text[:2000])
                       for key in ("download","fetch(","api/","shareId","publicId","fileId","prepare","presign","signed"):
                           pos = 0
                           shown = 0
